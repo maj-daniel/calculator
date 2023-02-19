@@ -25,26 +25,31 @@ body {
 }
 
 .digits {
-    width: 75%;
+    width: 58%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .operators {
-    width: 25%;
+    width: 38%;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
 .digit {
-    width: 33.33%;
+    width: 30%;
     font-size: 30px;
     height: 25%;
 }
 
 .operator, .function {
-    width: 100%;
+    width: 50%;
     font-size: 30px;
     height: 25%;
+}
+
+.function {
+    height: 50%;
 }
