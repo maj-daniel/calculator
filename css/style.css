@@ -1,55 +1,84 @@
 body {
     background-color: hsl(180, 90%, 80%);
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #calculator {
-    background-color: hsl(30, 10%, 80%);
-    width: 60%;
-    border-radius: 6px;
-    padding: 10px 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: stretch;
+    flex-direction: column;
+    align-items: center;
+    background-color: hsl(0, 0%, 70%);
+    width: 700px;
+    height: 800px;
+    border-radius: 10px;
+    box-shadow: -10px 10px 8px hsl(0, 0%, 50%);
 }
 
 .visor {
-    background-color: hsl(0, 0%, 10%);
-    color: hsl(120, 70%, 60%);
+    background-color: hsl(0, 0%, 5%);
+    color: hsl(220, 70%, 60%);
+    font-size: 90px;
     text-align: end;
-    width: 80%;
-    padding: 0 5%;
-    border-radius: 2px;
-    margin: 0 0 10px 0;
-    font-size: 20px;
+    width: 90%;
+    margin: 60px 0 70px 0;
+    border-radius: 10px;
+}
+
+.buttons {
+    display: flex;
+    background-color: hsl(0, 0%, 40%);
+    border-radius: 10px;
+    width: 90%;
+    padding: 10px 0;
+}
+
+.digits, .operators {
+    display: flex;
 }
 
 .digits {
-    width: 58%;
-    display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
+    width: 60%;
 }
 
 .operators {
-    width: 38%;
-    display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    width: 40%;
 }
 
-.digit {
-    width: 30%;
-    font-size: 30px;
+.digit, .function, .operator {
+   font-size: 60px;
+   font-weight: 700; 
+   border-radius: 20px;
+   height: 120px;
+   border: 1px solid black;
+}
+
+.operator:hover, .digit:hover {
+    background-color: hsl(0, 0%, 70%);
+}
+
+.function:hover {
+    background-color: hsl(220, 70%, 55%);
+}
+
+.operator {
     height: 25%;
-}
-
-.operator, .function {
     width: 50%;
-    font-size: 30px;
-    height: 25%;
 }
 
 .function {
     height: 50%;
+    background-color: hsl(220, 70%, 60%);
+    color: hsl(0, 0%, 100%);
+    width: 50%;
+}
+
+.digit {
+    width: 33.33%;
 }
