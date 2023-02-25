@@ -30,6 +30,7 @@ body {
 .visor .previous {
     font-size: 30px;
     margin: 5px 5px;
+    height: 34px;
 }
 
 .visor .current {
