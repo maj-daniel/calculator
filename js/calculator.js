@@ -64,11 +64,22 @@ function updateDisplay(e) {
 }
 
 function getOperator(e) {
-    if(display.textContent.length === "") return;
+    if(display.textContent.length === 0 && registry.textContent.length === 0) return;
+
+    operator = e.target.textContent;
+    if(display.textContent.length === 0){
+        return registry.textContent = `${registry.textContent.slice(0,-1)} ${operator}`;
+    }
 
     lastNumber = parseFloat(display.textContent);
-    operator = e.target.textContent;
     registry.textContent = `${lastNumber} ${operator}`
+    return display.textContent = "";
+}
+
+function clearVisor() {
+    if(display.textContent === ""){
+        return registry.textContent = "";
+    }
     return display.textContent = "";
 }
 
@@ -79,4 +90,5 @@ Calculator
 2 - Store the number writen in the display when click on operators
 3 - Save operator and wait for new operator
 4 - Operate calculation when "=" is clicked
+5 - Take string and separete into an array in order to do calculation
 */
