@@ -18,6 +18,9 @@ functionBtns.forEach(btn =>{
     if(btn.textContent === "="){
         btn.addEventListener("click", operate);
     }
+    if(btn.textContent === "AC"){
+        btn.addEventListener("click", clear);
+    }
 })
 
 function add(a, b) {
@@ -37,19 +40,29 @@ function divide(a, b) {
 }
 
 function operate() {
-    registry.textContent += ` ${display.textContent}`;
-    const calcArray = registry.textContent.split(" ");
+    currentNumber = parseFloat(display.textContent);
+    registry.textContent = `${lastNumber} ${operator} ${currentNumber}`;
+    let result;
 
-    switch(calcArray[1]){
+    switch(operator){
         case "+":
-            return display.textContent = add(parseFloat(calcArray[0]), parseFloat(calcArray[2]));
+            result = add(lastNumber, currentNumber);
+            display.textContent = result;
+            break;
         case "-":
-            return display.textContent = subtract(parseFloat(calcArray[0]), parseFloat(calcArray[2]));
+            result = subtract(lastNumber, currentNumber);
+            display.textContent = result;
+            break;
         case "x":
-            return display.textContent = multiply(parseFloat(calcArray[0]), parseFloat(calcArray[2]));
+            result = multiply(lastNumber, currentNumber);
+            display.textContent = result;
+            break;
         case "/":
-            return display.textContent = divide(parseFloat(calcArray[0]), parseFloat(calcArray[2]));
+            result = divide(lastNumber, currentNumber);
+            display.textContent = result;
     }
+
+    return result;
 }
 
 function updateDisplay(e) {
@@ -64,19 +77,24 @@ function updateDisplay(e) {
 }
 
 function getOperator(e) {
+
     if(display.textContent.length === 0 && registry.textContent.length === 0) return;
-
-    operator = e.target.textContent;
     if(display.textContent.length === 0){
+        operator = e.target.textContent;
         return registry.textContent = `${registry.textContent.slice(0,-1)} ${operator}`;
+    } else if(parseFloat(display.textContent)!= 0 && registry.textContent !== ""){
+        lastNumber = operate();
+        operator = e.target.textContent;
+    } else {
+        operator = e.target.textContent;
+        lastNumber = parseFloat(display.textContent);
     }
-
-    lastNumber = parseFloat(display.textContent);
+   
     registry.textContent = `${lastNumber} ${operator}`
     return display.textContent = "";
 }
 
-function clearVisor() {
+function clear() {
     if(display.textContent === ""){
         return registry.textContent = "";
     }
