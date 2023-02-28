@@ -93,3 +93,7 @@ body {
 .digit {
     width: 33.33%;
 }
+
+#zero {
+    flex-grow: 1;
+}

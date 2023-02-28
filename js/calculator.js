@@ -44,6 +44,12 @@ function operate() {
 
     //prevent from using not numbers
     if(isNaN(currentNumber) || isNaN(lastNumber) || currentNumber == null || lastNumber == null) return lastNumber;
+    if(currentNumber === 0 && operator === '/'){
+        currentNumber = null;
+        operator = null;
+        lastNumber = null;
+        return display.textContent = "ERROR";
+    }
 
     registry.textContent = `${lastNumber} ${operator} ${currentNumber}`;
     let result;
@@ -73,6 +79,10 @@ function operate() {
 function updateDisplay(e) {
     const btn = e.target.textContent;
     console.log(btn);
+    if(display.textContent === "ERROR"){
+        display.textContent = "";
+        registry.textContent = ""
+    }
     if(display.textContent.length >= 9) return;
 
     if(display.textContent == 0 && display.textContent === "0"){
@@ -85,7 +95,7 @@ function updateDisplay(e) {
 }
 
 function getOperator(e) {
-
+    if(display.textContent === "ERROR") return;
     if(display.textContent.length === 0 && registry.textContent.length === 0) return;
     if(display.textContent.length === 0){
         operator = e.target.textContent;
@@ -105,10 +115,10 @@ function getOperator(e) {
 
 function clear() {
     lastNumber = null;
-    registry.textContent = "";
     currentNumber = null;
     operator = null;
     display.textContent = "";
+    registry.textContent = "";
     return;
 }
 
