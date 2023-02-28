@@ -7,6 +7,7 @@ const registry = document.querySelector(".visor .previous");
 let lastNumber = null;
 let currentNumber = null;
 let operator = null;
+let wasEqualPressed = false;
 
 digitBtns.forEach(btn =>{
     btn.addEventListener("click", updateDisplay);
@@ -24,26 +25,28 @@ functionBtns.forEach(btn =>{
 })
 
 function add(a, b) {
-    return a + b;
+    return Math.round((a + b)* 1000) / 1000;
 }
 
 function subtract(a, b) {
-    return a - b;
+    return Math.round((a - b)* 1000) / 1000;
 }
 
 function multiply(a, b) {
-    return a * b;
+    return Math.round((a * b)* 1000) / 1000;
 }
 
 function divide(a, b) {
-    return a / b;
+    return Math.round((a / b)* 1000) / 1000;
 }
 
 function operate() {
-    currentNumber = parseFloat(display.textContent);
+
+    //prevent from using not numbers
+    if(isNaN(currentNumber) || isNaN(lastNumber) || currentNumber == null || lastNumber == null) return lastNumber;
+
     registry.textContent = `${lastNumber} ${operator} ${currentNumber}`;
     let result;
-
     switch(operator){
         case "+":
             result = add(lastNumber, currentNumber);
@@ -62,7 +65,9 @@ function operate() {
             display.textContent = result;
     }
 
-    return result;
+    currentNumber = null;
+    operator = null;
+    return lastNumber = result;
 }
 
 function updateDisplay(e) {
@@ -71,9 +76,12 @@ function updateDisplay(e) {
     if(display.textContent.length >= 9) return;
 
     if(display.textContent == 0 && display.textContent === "0"){
+        currentNumber = parseFloat(display.textContent);
         return display.textContent = btn;
     }
-    return display.textContent += btn;
+
+    display.textContent += btn;
+    return currentNumber = parseFloat(display.textContent);
 }
 
 function getOperator(e) {
@@ -84,21 +92,24 @@ function getOperator(e) {
         return registry.textContent = `${registry.textContent.slice(0,-1)} ${operator}`;
     } else if(parseFloat(display.textContent)!= 0 && registry.textContent !== ""){
         lastNumber = operate();
+        currentNumber = null;
         operator = e.target.textContent;
     } else {
         operator = e.target.textContent;
         lastNumber = parseFloat(display.textContent);
     }
-   
-    registry.textContent = `${lastNumber} ${operator}`
+
+    registry.textContent = `${lastNumber} ${operator}`;
     return display.textContent = "";
 }
 
 function clear() {
-    if(display.textContent === ""){
-        return registry.textContent = "";
-    }
-    return display.textContent = "";
+    lastNumber = null;
+    registry.textContent = "";
+    currentNumber = null;
+    operator = null;
+    display.textContent = "";
+    return;
 }
 
 /* 
