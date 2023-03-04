@@ -8,3 +8,5 @@ This is an calculator that does the following things:
 - Divide.
 
 All of this using two number, provided from the user.
+
+Acess it here : https://maj-daniel.github.io/calculator/
